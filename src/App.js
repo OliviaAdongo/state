@@ -1,8 +1,23 @@
+import { response } from 'express';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Form from './components/Form';
 import Stand from './components/Stand';
 
 function App() {
+const [post, setPost]= useState()
+
+useEffect(()=>{
+  fetch('http://localhost:5600/posts')
+  .then(response => response.json())
+  .then(
+    (post) => {
+      setPost(post)
+    console.log(setPost)
+    }
+    )
+
+},[])
   return (
     <div className="App">
     <form>
@@ -25,13 +40,13 @@ function App() {
 
 <div className="form-outline mb-4">
   <input type="text" id="form6Example3" className="form-control" />
-  <label className="form-label" for="form6Example3">Company name</label>
+  <label className="form-label" for="form6Example3">Event</label>
 </div>
 
 
 <div className="form-outline mb-4">
-  <input type="text" id="form6Example4" className="form-control" />
-  <label className="form-label" for="form6Example4">Address</label>
+  <input type="number" id="form6Example4" className="form-control" />
+  <label className="form-label" for="form6Example4">Age</label>
 </div>
 
 
@@ -42,23 +57,16 @@ function App() {
 
 
 <div className="form-outline mb-4">
-  <input type="number" id="form6Example6" className="form-control" />
+  <input type="tel" id="form6Example6" className="form-control" />
   <label className="form-label" for="form6Example6">Phone</label>
 </div>
+      <div>
+      <input type="radio" value='Female'/>  Female
+        <input type="radio" value='Male' /> Male
+      </div>
 
-<div className="form-outline mb-4">
-  <textarea className="form-control" id="form6Example7" rows="4"></textarea>
-  <label className="form-label" for="form6Example7">Additional information</label>
-</div>
-
-
-<div className="form-check d-flex justify-content-center mb-4">
-  <input className="form-check-input me-2" type="checkbox" value="" id="form6Example8" checked />
-  <label className="form-check-label" for="form6Example8"> Create an account? </label>
-</div>
-
-
-<button type="submit" className="btn btn-primary btn-block mb-4">Place order</button>
+<button type="submit" className="btn btn-primary btn-block mb-4">Add Info</button>
+<button type="submit" className="btn btn-primary btn-block mb-4">Delete</button>
 </form>
     </div>
   );
